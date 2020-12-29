@@ -1,9 +1,11 @@
 
+import Layout from './hoc/Layout/Layout';
+
 function App() {
   return (
-    <div className="App">
-      
-    </div>
+      <Layout>
+        <div style={{width: '400px', border: '1px solid #ccc'}}>quiz</div>
+      </Layout>
   );
 }
 
