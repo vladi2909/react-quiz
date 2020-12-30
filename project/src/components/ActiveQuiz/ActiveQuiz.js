@@ -8,7 +8,8 @@ const ActiveQuiz = props => (
             <span>{props.answerNumber}.</span>&nbsp;
             {props.question}
         </p>
-        <AnswersList 
+        <AnswersList
+            state={props.state}
             answers={props.answers}
             onAnswerClick={props.onAnswerClick}
         />
