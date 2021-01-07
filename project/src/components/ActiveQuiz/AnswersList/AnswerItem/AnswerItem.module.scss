@@ -6,11 +6,6 @@
     cursor: pointer;
 }
 
-.AnswerItem:hover {
-    background: rgba(0, 0, 0, .1);
-    transition: background .3s ease-in-out;
-}
-
 .AnswerItem.success {
     background: rgba(161, 240, 69, .7);
 }
