@@ -29,7 +29,9 @@ const FinishedQuiz = props => {
                             <i className={cls.join(' ')} />
                             {
                                 props.results[quizItem.id] === 'error'
-                                    ? <p>right: {quizItem.answers[quizItem.rightAnswerId - 1].text}</p>
+                                    ? <>
+                                        <p>right: {quizItem.answers[quizItem.rightAnswerId - 1].text}</p>
+                                      </>
                                     : null
                             }
 
@@ -38,9 +40,7 @@ const FinishedQuiz = props => {
                     );
                 })
                 }
-            </ul>
-            <p>Right {successCount} from {props.quiz.length}</p>
-            {/* <div> */}
+                <p className={classes.ResultsCount}>Right {successCount} from {props.quiz.length}</p>
                 <Button
                     onClick={props.onRepeat}
                     variant="contained"
@@ -55,7 +55,7 @@ const FinishedQuiz = props => {
                     size="small">
                     Return to tests
                 </Button>
-            {/* </div> */}
+            </ul>
         </>
     );
 }

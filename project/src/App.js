@@ -18,10 +18,11 @@ function App() {
     <ThemeProvider theme={theme}>
       <Paper>
         <Layout>
-          <Switch
-            checked={darkMode}
-            onChange={() => setDarkMode(!darkMode)}
-          />
+          <div style={{position: 'absolute', right: '40px', top: '35px'}}>
+            <Switch
+              checked={darkMode}
+              onChange={() => setDarkMode(!darkMode)}/>
+          </div>
           <Quiz />
         </Layout>
       </Paper>
