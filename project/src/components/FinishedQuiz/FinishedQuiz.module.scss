@@ -1,22 +1,18 @@
 .FinishedQuiz {
     margin: 0 10px;
     padding: 20px;
+    list-style: none;
     border: 1px solid;
     border-radius: 5px;
     box-sizing: border-box;
 }
 
-.FinishedQuiz ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.FinishedQuiz ul li i {
+.FinishedQuiz li i {
+    padding-top: 5px;
     margin-left: 10px;
 }
 
-.FinishedQuiz ul li p {
+.FinishedQuiz li p {
     margin: 0;
 }
 
@@ -26,4 +22,8 @@
 
 .error {
     color: rgba(255, 1, 35, 0.842);
+}
+
+.Button {
+    margin-left: 20px;
 }

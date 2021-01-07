@@ -1,5 +1,6 @@
 import React from 'react';
 import classes from './FinishedQuiz.module.scss';
+import Button from '@material-ui/core/Button';
 
 const FinishedQuiz = props => {
     const successCount = Object.keys(props.results).reduce((total, key) => {
@@ -11,8 +12,9 @@ const FinishedQuiz = props => {
     }, 0)
 
     return (
-        <div className={classes.FinishedQuiz}>
-            <ul>
+        <>
+            <h1>Results</h1>
+            <ul className={classes.FinishedQuiz}>
                 {props.quiz.map((quizItem, index) => {
                     const cls = [
                         'fa',
@@ -27,10 +29,10 @@ const FinishedQuiz = props => {
                             <i className={cls.join(' ')} />
                             {
                                 props.results[quizItem.id] === 'error'
-                                ?  <p>right answer: {quizItem.answers[quizItem.rightAnswerId - 1].text}</p>
-                                : null
+                                    ? <p>right: {quizItem.answers[quizItem.rightAnswerId - 1].text}</p>
+                                    : null
                             }
-                            
+
                         </li>
 
                     );
@@ -38,10 +40,23 @@ const FinishedQuiz = props => {
                 }
             </ul>
             <p>Right {successCount} from {props.quiz.length}</p>
-            <div>
-                <button onClick={props.onRepeat}>Repeate</button>
-            </div>
-        </div>
+            {/* <div> */}
+                <Button
+                    onClick={props.onRepeat}
+                    variant="contained"
+                    color="primary"
+                    size="small">
+                    Repeate
+                </Button>
+                <Button
+                    className={classes.Button}
+                    variant="contained"
+                    color="secondary"
+                    size="small">
+                    Return to tests
+                </Button>
+            {/* </div> */}
+        </>
     );
 }
 
