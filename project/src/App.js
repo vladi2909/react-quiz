@@ -1,9 +1,16 @@
 
 import Layout from './hoc/Layout/Layout';
 import Quiz from './containers/Quiz/Quiz';
+
+import { Route } from 'react-router-dom';
+
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { Paper, Switch } from '@material-ui/core';
 import { useState } from 'react';
+import { Paper, Switch } from '@material-ui/core';
+
+import QuizList from './containers/QuizList/QuizList';
+import Auth from './containers/Auth/Auth';
+import QuizCreator from './containers/QuizCreator/QuizCreator';
 
 function App() {
 
@@ -23,7 +30,12 @@ function App() {
               checked={darkMode}
               onChange={() => setDarkMode(!darkMode)}/>
           </div>
-          <Quiz />
+          <div>
+            <Route path="/" component={QuizList} exact />
+            <Route path="/auth" component={Auth} exact />
+            <Route path="/quiz-creator" component={QuizCreator} exact />
+            <Route path="/quiz/:id" component={Quiz} exact />
+          </div>
         </Layout>
       </Paper>
     </ThemeProvider>
