@@ -1,16 +1,15 @@
 
 import Layout from './hoc/Layout/Layout';
 import Quiz from './containers/Quiz/Quiz';
+import QuizList from './containers/QuizList/QuizList';
+import Auth from './containers/Auth/Auth';
+import QuizCreator from './containers/QuizCreator/QuizCreator';
 
 import { Route } from 'react-router-dom';
 
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { useState } from 'react';
 import { Paper, Switch } from '@material-ui/core';
-
-import QuizList from './containers/QuizList/QuizList';
-import Auth from './containers/Auth/Auth';
-import QuizCreator from './containers/QuizCreator/QuizCreator';
 
 function App() {
 

@@ -4,7 +4,7 @@ import Backdrop from '../../ui/Backdrop/Backdrop';
 import { NavLink } from 'react-router-dom';
 
 const links = [
-    { to: '/', label: 'List', exact: true },
+    { to: '/', label: 'List of tests', exact: true },
     { to: '/auth', label: 'Authorization', exact: false },
     { to: '/quiz-creator', label: 'Create test', exact: false }
 ];

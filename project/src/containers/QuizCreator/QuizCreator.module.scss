@@ -1,3 +1,29 @@
 .QuizCreator {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+.QuizCreator div {
+    max-width: 600px;
+    width: 100%;
+}
+
+.QuizCreator h1 {
+    text-align: center;
+}
+
+.QuizCreator .QuizInput {
+    margin: 10px 0;
+}
+
+.QuizCreator .FormControl {
+    margin: 10px 0;
+}
+
+.QuizCreator .button {
+    margin-top: 10px;
+    margin-right: 20px;
 }
