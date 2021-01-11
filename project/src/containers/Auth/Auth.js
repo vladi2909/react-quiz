@@ -3,6 +3,7 @@ import classes from './Auth.module.scss';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import FormErrors from './FormErrors/FormErrors';
+import axios from '../../axios/axios-quiz';
 
 class Auth extends Component {
 
@@ -53,11 +54,34 @@ class Auth extends Component {
     }
 
 
-    loginHandler = () => {
-        console.log(this.state);
+    loginHandler = async () => {
+        const authData = {
+            email: this.state.email,
+            password: this.state.password,
+            returnSecureToken: true
+        };
+
+        try {
+            const response = await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBXgzkjTANfM4ow51ufJGcZs3O7UfN-uqw', authData);
+            console.log(response.data);
+        } catch (e) {
+            console.log(e);
+        }
     }
 
-    registerHandler = () => {
+    registerHandler = async () => {
+        const authData = {
+            email: this.state.email,
+            password: this.state.password,
+            returnSecureToken: true
+        };
+
+        try {
+            const response = await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBXgzkjTANfM4ow51ufJGcZs3O7UfN-uqw', authData);
+            console.log(response.data);
+        } catch (e) {
+            console.log(e);
+        }
 
     }
 

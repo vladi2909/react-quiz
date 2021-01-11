@@ -5,34 +5,20 @@ import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
+import axios from '../../axios/axios-quiz';
 
 class QuizCreator extends Component {
 
     state = {
         quiz: [],
         question: '',
-        rightAnswer: '',
+        rightAnswerId: '',
         id: '',
         option1: '',
         option2: '',
         option3: '',
-        option4: '',
-        formValid: true
+        option4: ''
     };
-
-    // createFormControls() {
-    //     return {
-    //         question: '',
-    //         option1: '',
-    //         option2: '',
-    //         option3: '',
-    //         option4: '',
-    //         selected: '',
-    //         rightAnswer: '',
-    //         formErrors: { email: '', password: '' },
-    //         formValid: true
-    //     }
-    // }
 
     submitHandler = event => {
         event.preventDefault();
@@ -42,17 +28,17 @@ class QuizCreator extends Component {
         event.preventDefault();
         const quiz = [...this.state.quiz];
         const index = quiz.length + 1;
-        const { question, option1, option2, option3, option4, rightAnswer } = this.state;
+        const { question, option1, option2, option3, option4, rightAnswerId } = this.state;
 
         const questionItem = {
             question: question,
             id: index,
-            rightAnswer: rightAnswer,
+            rightAnswerId: rightAnswerId,
             answers: [
-                { text: option1 },
-                { text: option2 },
-                { text: option3 },
-                { text: option4 }
+                { text: option1, id: '1' },
+                { text: option2, id: '2' },
+                { text: option3, id: '3' },
+                { text: option4, id: '4' }
             ]
         };
 
@@ -60,19 +46,32 @@ class QuizCreator extends Component {
         this.setState({
             quiz,
             question: '',
-            rightAnswer: '',
+            rightAnswerId: '',
             id: '',
             option1: '',
             option2: '',
             option3: '',
-            option4: '',
-            formValid: true
+            option4: ''
         });
     }
 
-    createTestHandler = (event) => {
+    createTestHandler = async event => {
         event.preventDefault();
-        console.log(this.state.quiz);
+        try {
+            await axios.post('/quiz.json', this.state.quiz)
+            this.setState({
+                quiz: [],
+                question: '',
+                rightAnswerId: '',
+                id: '',
+                option1: '',
+                option2: '',
+                option3: '',
+                option4: ''
+            });
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     inputChangeHandler = event => {
@@ -133,11 +132,11 @@ class QuizCreator extends Component {
 
                             <Select
                                 native
-                                value={this.state.rightAnswer}
+                                value={this.state.rightAnswerId}
                                 onChange={this.inputChangeHandler}
                                 label="correct option"
                                 inputProps={{
-                                    name: 'rightAnswer',
+                                    name: 'rightAnswerId',
                                     id: 'age-native-simple',
                                 }}
                             >

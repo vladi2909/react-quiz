@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import classes from './Quiz.module.scss';
 import ActiveQuiz from '../../components/ActiveQuiz/ActiveQuiz';
 import FinishedQuiz from '../../components/FinishedQuiz/FinishedQuiz';
+import axios from '../../axios/axios-quiz';
+import Loader from '../../components/ui/Loader/Loader';
 
 class Quiz extends Component {
     state = {
@@ -9,28 +11,8 @@ class Quiz extends Component {
         isFinished: false,
         activeQuestion: 0,
         answerState: null,
-        quiz: [
-            {
-                id: 0,
-                question: 'how are you?',
-                rightAnswerId: 2,
-                answers: [
-                    { text: 'I am fine', id: 1 },
-                    { text: 'ok', id: 2 },
-                    { text: 'normal, thanks', id: 3 }
-                ]
-            },
-            {
-                id: 1,
-                question: 'where are you from ?',
-                rightAnswerId: 1,
-                answers: [
-                    { text: 'canada', id: 1 },
-                    { text: 'usa', id: 2 },
-                    { text: 'poland', id: 3 }
-                ]
-            }
-        ]
+        quiz: [],
+        loading: true
     };
 
     onAnswerClickHandler = answerId => {
@@ -84,30 +66,42 @@ class Quiz extends Component {
         })
     }
 
+    async componentDidMount() {
+        try {
+            const response = await axios.get(`/quiz/${this.props.match.params.id}.json`);
+            const quiz = response.data;
+            this.setState({ quiz, loading: false })
+        } catch (e) {
+            console.log(e);
+        }
+
+    }
+
     render() {
         return (
             <div className={classes.Quiz}>
                 <div className={classes.QuizWrapper}>
                     {
-                        this.state.isFinished
-                            ? <FinishedQuiz
-                                results={this.state.results}
-                                quiz={this.state.quiz}
-                                onRepeat={this.repeatHandler}
-                              />
-                            : <>
-                                <h1>Answer the questions</h1>
-                                <ActiveQuiz
-                                    answers={this.state.quiz[this.state.activeQuestion].answers}
-                                    question={this.state.quiz[this.state.activeQuestion].question}
-                                    onAnswerClick={this.onAnswerClickHandler}
-                                    quizLength={this.state.quiz.length}
-                                    answerNumber={this.state.activeQuestion + 1}
-                                    state={this.state.answerState}
-                                />
-                            </>
+                        this.state.loading
+                            ? <Loader />
+                            : this.state.isFinished
+                                ? <FinishedQuiz
+                                    results={this.state.results}
+                                    quiz={this.state.quiz}
+                                    onRepeat={this.repeatHandler}
+                                  />
+                                : <>
+                                    <h1>Answer the questions</h1>
+                                    <ActiveQuiz
+                                        answers={this.state.quiz[this.state.activeQuestion].answers}
+                                        question={this.state.quiz[this.state.activeQuestion].question}
+                                        onAnswerClick={this.onAnswerClickHandler}
+                                        quizLength={this.state.quiz.length}
+                                        answerNumber={this.state.activeQuestion + 1}
+                                        state={this.state.answerState}
+                                    />
+                                </>
                     }
-
                 </div>
             </div>
         )
