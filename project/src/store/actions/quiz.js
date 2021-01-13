@@ -24,7 +24,7 @@ export function fetchQuizes() {
             })
             dispatch(fetchQuizesSuccess(quizes));
         } catch (e) {
-            dispatch(fetchQuizesError(e))
+            dispatch(fetchQuizesError(e));
         }
     }
 }
@@ -85,7 +85,7 @@ export function finishQuiz() {
 export function quizNextQuestion(number) {
     return {
         type: QUIZ_NEXT_QUESTION,
-        number 
+        number
     }
 }
 
@@ -119,10 +119,10 @@ export function quizAnswerClick(answerId) {
                 results[question.id] = 'success';
             }
 
-            dispatch(quizSetState({[answerId]: 'success'}, results))
+            dispatch(quizSetState({ [answerId]: 'success' }, results))
         } else {
             results[question.id] = 'error';
-            dispatch(quizSetState({[answerId]: 'error'}, results))
+            dispatch(quizSetState({ [answerId]: 'error' }, results))
         }
     }
 }
