@@ -3,8 +3,9 @@ import classes from './Auth.module.scss';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import FormErrors from './FormErrors/FormErrors';
-import axios from '../../axios/axios-quiz';
-
+import { connect } from 'react-redux';
+import { auth } from '../../store/actions/auth';
+ 
 class Auth extends Component {
 
     state = {
@@ -54,35 +55,20 @@ class Auth extends Component {
     }
 
 
-    loginHandler = async () => {
-        const authData = {
-            email: this.state.email,
-            password: this.state.password,
-            returnSecureToken: true
-        };
-
-        try {
-            const response = await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBXgzkjTANfM4ow51ufJGcZs3O7UfN-uqw', authData);
-            console.log(response.data);
-        } catch (e) {
-            console.log(e);
-        }
+    loginHandler = () => {
+        this.props.auth(
+            this.state.email,
+            this.state.password,
+            true
+        );
     }
 
-    registerHandler = async () => {
-        const authData = {
-            email: this.state.email,
-            password: this.state.password,
-            returnSecureToken: true
-        };
-
-        try {
-            const response = await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBXgzkjTANfM4ow51ufJGcZs3O7UfN-uqw', authData);
-            console.log(response.data);
-        } catch (e) {
-            console.log(e);
-        }
-
+    registerHandler = () => {
+        this.props.auth(
+            this.state.email,
+            this.state.password,
+            false
+        )
     }
 
     submitHandler = event => {
@@ -99,7 +85,6 @@ class Auth extends Component {
                         <div className={classes.InputWrap}>
 
                             <TextField
-                                // id="email"
                                 name="email"
                                 label="Email"
                                 variant="outlined"
@@ -107,7 +92,7 @@ class Auth extends Component {
                                 value={this.state.email}
                                 onChange={this.userInputHandler} />
                             <TextField
-                                // id="password"
+                                style={{marginTop: '20px'}}
                                 name="password"
                                 label="Password"
                                 variant="outlined"
@@ -138,4 +123,10 @@ class Auth extends Component {
     }
 }
 
-export default Auth;
+function mapDispatchToProps(dispatch) {
+    return {
+        auth: (email, password, isLogin) => dispatch(auth(email, password, isLogin))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Auth);

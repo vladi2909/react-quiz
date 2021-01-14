@@ -12,14 +12,14 @@
 }
 
 .AuthForm {
-    width: 500px;
-    padding: 40px 0;
+    padding: 40px;
     border: 1px solid;
     border-radius: 5px;
 }
 
 .InputWrap {
     display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 
